@@ -1,15 +1,32 @@
-let num = 266219;
+let lang = "en";
 
-let array = num.toString().split("");
+let weekdayru = ["Понедельник", "Вторник", "Среда", "Четверг" , "Пятница" , "Суббота", "Воскресенье"];
+let weekdayen = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
-array.forEach(numbers => {
-});
+if (lang == "ru") {
+  console.log(weekdayru);
+} else {
+  console.log(weekdayen);
+}
 
-let result = array.reduce(function (a , b) {
-  return a * b;
-});
+switch (lang) {
+  case "ru":
+    console.log(weekdayru);
+    break;
+  case "en":
+    console.log(weekdayen);
+    break;
+}
 
-console.log("Результат перемножения чисел массива=", result);
-result = result ** 3;
-console.log("Результат возведения в степень =", result);
-console.log("Два первых числа=", result.toString().substring(0, 2));
+let lang_array = [];
+lang_array["ru"] = ["Понедельник", "Вторник", "Среда", "Четверг" , "Пятница" , "Суббота", "Воскресенье"];
+lang_array["en"] = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+lang = "ru";
+console.log(lang_array[lang]);
+
+let namePerson = "Артем";
+namePerson === "Артем" ? console.log("директор") : (namePerson === "Александр") ? console.log("преподаватель") : console.log("студент");
+
+
+
+
