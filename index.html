@@ -5,8 +5,43 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  
 </head>
 <body>
-  <script src="./script.js"></script>
+  <script>
+    "use strict";
+
+      const week = ['Понедельник', 'Вторник', 'Среда', 'Четверг',
+        'Пятница', 'Суббота', 'Воскресенье'];
+
+      const currentDayWeek = () => {
+        let numDay = new Date().getDay();
+        return (numDay) ? numDay - 1 : 6;
+      };
+
+      const outDaysWeek = () => {
+        const body = document.querySelector('body');
+        const current = currentDayWeek();
+
+        let txtBody = '';
+
+        week.forEach((day, index) => {
+          let txtLine = day;
+
+         
+          if (index > 4) {
+            txtLine = '<i>' + txtLine + '</i>';
+          }
+         
+          if (index === current) {
+            txtLine = '<b>' + txtLine + '</b>';
+          }
+          txtBody += txtLine + '<br />';
+        });
+        body.innerHTML = txtBody;
+      };
+
+      outDaysWeek();
+  </script>
 </body>
 </html>
