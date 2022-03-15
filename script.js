@@ -1,34 +1,41 @@
-"use strict";
+const getData = (url) => {
+    return fetch(url).then((response) => {
+        if (response.ok) {
+            return response.json()
+        } else {
+            throw new Error(
+                `Отправка данных "${response.url}", завершилось ошибкой: "${response.status}: ${response.statusText}"`
+            )
+        }
+    })
+}
 
-// получение по AJAX запросу 
-const getData = (url) => fetch(url)
-    .then(response => response.json());
-
-//.then(response => response.json())  // body в формат json
-//.then(promise => promise.response);  // возвращаем полученный json
-
-// отправка AJAX запроса
-const sendData = ({ url, data = {} }) => {
+const sendData = (url, data = {}) => {
     return fetch(url, {
-        method: 'POST',
+        method: "POST",
         body: JSON.stringify(data),
         headers: {
-            'Content-type': 'application/json; charset=UTF-8',
+            "Content-type": "application/json; charset=UTF-8",
         },
-    }).then(response => response.json());  // сразу переводим в json()    
-};
+    }).then((response) => {
+        if (response.ok) {
+            return response.json()
+        } else {
+            throw new Error(
+                `Отправка данных "${response.url}", завершилось ошибкой: "${response.status}: ${response.statusText}"`
+            )
+        }
+    })
+}
 
-
-// после загрузки читаем файл posts.json
-// при успешном скачивании - отправляем по адресу
-document.addEventListener("DOMContentLoaded", () => {
-    getData('posts.json')
-        .then(data => sendData({
-            url: 'https://jsonplaceholder.typicode.com/posts',
-            data
-        }));
-});
-
+getData('db.json')
+    .then((response) => sendData("https://jsonplaceholder.typicode.com/posts", response))
+    .then((data) => {
+        console.log(data);
+    })
+    .catch((error) => {
+        console.log(error);
+    });
 
 // отправка методом XMLHttpRequest
 // читаем файл для отправки
